@@ -3,11 +3,19 @@ import Dashboard from "@/components/Dashboard.tsx";
 import LoginScreen from "@/components/LoginScreen.tsx";
 
 export default function App() {
-    const [token, setToken] = useState<string | null>(null);
+    const [token, setToken] = useState<string | null>(() => {
+        const rawToken = localStorage.getItem('token');
+        if(rawToken)
+            return JSON.parse(rawToken)
+        else return null;
+    });
 
     if (!token) {
         return <LoginScreen onLoginSuccess={setToken} />;
     }
 
-    return <Dashboard token={token} onLogout={() => setToken(null)} />;
+    return <Dashboard token={token} onLogout={() => {
+        setToken(null);
+        localStorage.removeItem('token');
+    }} />;
 }

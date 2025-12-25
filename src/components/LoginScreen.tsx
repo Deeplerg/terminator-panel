@@ -26,6 +26,7 @@ export default function LoginScreen({ onLoginSuccess }: { onLoginSuccess: (t: st
             if (!res.ok) throw new Error("Invalid credentials");
             const data = await res.json();
             onLoginSuccess(data.accessToken);
+            localStorage.setItem('token', JSON.stringify(data.accessToken))
         } catch (err) {
             setError("Login failed");
             console.error("login failed", err);
