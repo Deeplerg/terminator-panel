@@ -41,16 +41,18 @@ export default function LoginScreen({ onLoginSuccess }: { onLoginSuccess: (t: st
                 <h1 className="text-xl font-bold text-center">Admin</h1>
 
                 <div className="flex flex-col gap-1">
-                    <label className="text-sm">Username</label>
+                    <Label className="text-sm" htmlFor="username">Username</Label>
                     <Input
+                        id="username"
                         value={username}
                         onChange={e => setUsername(e.target.value)}
                     />
                 </div>
 
                 <div className="flex flex-col gap-1">
-                    <Label className="text-sm">Password</Label>
+                    <Label className="text-sm" htmlFor="password">Password</Label>
                     <Input
+                        id="password"
                         type="password"
                         value={password}
                         onChange={e => setPassword(e.target.value)}
