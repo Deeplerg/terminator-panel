@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {useCallback, useState} from 'react';
 import Dashboard from "@/components/Dashboard.tsx";
 import LoginScreen from "@/components/LoginScreen.tsx";
 
@@ -10,12 +10,14 @@ export default function App() {
         else return null;
     });
 
+    const logout = useCallback(() => {
+        setToken(null);
+        localStorage.removeItem('token');
+    }, [])
+
     if (!token) {
         return <LoginScreen onLoginSuccess={setToken} />;
     }
 
-    return <Dashboard token={token} onLogout={() => {
-        setToken(null);
-        localStorage.removeItem('token');
-    }} />;
+    return <Dashboard token={token} onLogout={logout} />;
 }
